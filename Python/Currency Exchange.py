@@ -76,14 +76,8 @@ def exchangeable_value(budget, exchange_rate, spread, denomination):
     :return: int - maximum value you can get.
     """
 
-    # Convierte el diferencial a decimal
-    spread_decimal = (spread / 100) + 1
-
-    # Calcula el nuevo tipo de cambio
-    new_exchange_rate = exchange_rate * spread_decimal
-
-    # Calcula el valor máximo de la nueva moneda
+    spread_decimal = (spread / 100)
+    exchange_percentage = exchange_rate * spread_decimal
+    new_exchange_rate = exchange_rate + exchange_percentage
     max_value = budget / new_exchange_rate
-
-    # Devuelve el valor máximo como un entero (redondeado hacia abajo)
-    return int(max_value % denomination)
+    return max_value - (max_value % denomination)
